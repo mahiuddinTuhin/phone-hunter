@@ -42,7 +42,7 @@ const displayPhone = (phones, dataLimit) => {
 
                     <!-- Button trigger modal -->
                   <button
-                      onclick="loadPhoneDetails('${phone.slug}')
+                      onclick="loadPhoneDetails('${phone.slug}')"
                       href="#"
                       type="button"
                       class="btn btn-primary"
@@ -106,3 +106,19 @@ function loadingBtn(isLoading) {
 document.getElementById("show-all").addEventListener("click", function () {
   displaySearch();
 });
+
+const loadPhoneDetails = async (id) => {
+  // alert("f works");
+  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayPhoneDetails(data.data);
+};
+
+const displayPhoneDetails = (phone) => {
+  const modalTitle = document.getElementById("phoneDetailModalLabel");
+  const modalImage = document.getElementById("phoneDetailModalImage");
+  modalImage.src = `${phone.image}`;
+  modalTitle.innerHTML = `${phone.name}`;
+  console.log(phone);
+};
