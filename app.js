@@ -36,7 +36,20 @@ const displayPhone = (phones, dataLimit) => {
                     <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
                         additional
                         content. This content is a little bit longer.</p>
-                    <button class="btn btn-primary" onclick="loadPhoneDetails('${phone.slug}')">Show Details</button>
+                    
+                    
+
+                    <button
+                        onclick="loadPhoneDetails('${phone.slug}')
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        Launch
+                        static
+                        backdrop
+                        modal
+                    </button>
                 </div>
             </div>
     </div>
