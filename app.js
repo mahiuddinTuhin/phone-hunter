@@ -36,8 +36,7 @@ const displayPhone = (phones, dataLimit) => {
                     <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
                         additional
                         content. This content is a little bit longer.</p>
-                    <button class="btn btn-primary" onclick="loadPhoneDetails('${phone.slug}')" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Show Details</button>
-                     
+                    <button class="btn btn-primary" onclick="loadPhoneDetails('${phone.slug}')">Show Details</button>
                 </div>
             </div>
     </div>
@@ -100,40 +99,37 @@ document.getElementById("show-all").addEventListener("click", function () {
   displaySearch();
 });
 
-// const loadPhoneDetails = async (id) => {
-//   const url = `https://openapi.programming-hero.com/api/phone/${id}`;
-//   console.log(url);
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   // console.log(data.data.mainFeatures);
-//   const datas = data.data;
+loadPhoneDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+  console.log(url);
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data.data.mainFeatures);
+  const datas = data.data;
+  const div = document.createElement("div");
+  const phoneDetailsContainer = document.getElementById(
+    "phone-details-container"
+  );
+  phoneDetailsContainer.innerHTML = "";
 
-//   const staticBackdrop = document.getElementById("staticBackdrop");
-//   const div = document.createElement("div");
-//   console.log(data);
-//   // div.innerHTML = `
-//   //   <div class="modal-dialog modal-dialog-centered">
-//   //           <div class="modal-content">
-//   //               <div class="modal-header">
-//   //                   <h5 class="modal-title" id="staticBackdropLabel">${datas.name}</h5>
-//   //                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-//   //               </div>
-//   //               <div class="modal-body">
-//   //                   <img src="${datas.image}" class="card-img-top px-4 py-5 h-50 w-50 mx-auto" alt="...">
-//   //                   <h3 class="card-title">${datas.releaseDate}</h3>
-//   //                   <p>${datas.mainFeatures.storage}</p>
-//   //                   <p>${datas.mainFeatures.displaySize}</p>
-//   //                   <p>${datas.mainFeatures.chipSet}</p>
-//   //                   <p>${datas.mainFeatures.sensors}</p>
-//   //               </div>
-//   //               <div class="modal-footer">
-//   //                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-//   //                   <button type="button" class="btn btn-primary">Understood</button>
-//   //               </div>
-//   //           </div>
-//   //       </div>
-//   // `;
+  div.innerHTML = `
+    <div class="col w-50">
+            <div class="card m-4 ">
+                <img src="${datas.image}" class="card-img-top px-4 py-5 h-50 w-50 mx-auto" alt="...">
+                <div class="card-body bg-secondary text-white">
+                    <h1 class="card-title text-white-50 text-center">Phone details</h1>
 
-//   // alert("btn works");
-//   staticBackdrop.appendChild(div);
-// };
+                    <h1 class="card-title">${datas.name}</h1>
+                    <h3 class="card-title">${datas.releaseDate}</h3>
+                    <p>${datas.mainFeatures.storage}</p>
+                    <p>${datas.mainFeatures.displaySize}</p>
+                    <p>${datas.mainFeatures.chipSet}</p>
+                    <p>${datas.mainFeatures.sensors}</p>                  
+                </div>
+            </div>
+    </div>
+  `;
+
+  // alert("btn works");
+  phoneDetailsContainer.appendChild(div);
+};
