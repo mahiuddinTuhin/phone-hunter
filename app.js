@@ -38,19 +38,20 @@ const displayPhone = (phones, dataLimit) => {
                         content. This content is a little bit longer.</p>
                     
                     
+                  
 
-                    <button
-                        onclick="loadPhoneDetails('${phone.slug}')
-                        type="button"
-                        class="btn btn-primary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">
-                        Launch
-                        static
-                        backdrop
-                        modal
-                    </button>
-                </div>
+                    <!-- Button trigger modal -->
+                  <button
+                      onclick="loadPhoneDetails('${phone.slug}')
+                      href="#"
+                      type="button"
+                      class="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#phoneDetailModal">
+                      Show detail
+                  </button>
+
+
             </div>
     </div>
   `;
@@ -93,12 +94,6 @@ input.addEventListener("keypress", function (event) {
   }
 });
 
-// clicked function
-
-// const clickedPhone = () => {
-//   document.getElementById;
-// };
-
 function loadingBtn(isLoading) {
   const loadingBtn = document.getElementById("loading-btn");
   if (isLoading) {
@@ -111,38 +106,3 @@ function loadingBtn(isLoading) {
 document.getElementById("show-all").addEventListener("click", function () {
   displaySearch();
 });
-
-loadPhoneDetails = async (id) => {
-  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
-  console.log(url);
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(data.data.mainFeatures);
-  const datas = data.data;
-  const div = document.createElement("div");
-  const phoneDetailsContainer = document.getElementById(
-    "phone-details-container"
-  );
-  phoneDetailsContainer.innerHTML = "";
-
-  div.innerHTML = `
-    <div class="col w-50">
-            <div class="card m-4 ">
-                <img src="${datas.image}" class="card-img-top px-4 py-5 h-50 w-50 mx-auto" alt="...">
-                <div class="card-body bg-secondary text-white">
-                    <h1 class="card-title text-white-50 text-center">Phone details</h1>
-
-                    <h1 class="card-title">${datas.name}</h1>
-                    <h3 class="card-title">${datas.releaseDate}</h3>
-                    <p>${datas.mainFeatures.storage}</p>
-                    <p>${datas.mainFeatures.displaySize}</p>
-                    <p>${datas.mainFeatures.chipSet}</p>
-                    <p>${datas.mainFeatures.sensors}</p>                  
-                </div>
-            </div>
-    </div>
-  `;
-
-  // alert("btn works");
-  phoneDetailsContainer.appendChild(div);
-};
